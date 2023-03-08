@@ -27,6 +27,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
     _fetchTaxPayerTypes();
     _getFiscalYears();
     salaryController.addListener(calculateTotalIncome);
+    monthsController.text = "12"; // set default value of Bonus
     bonusController.addListener(calculateTotalIncome);
     monthsController.addListener(calculateTotalIncome);
     totalSalController.text = totalSal.toStringAsFixed(2);

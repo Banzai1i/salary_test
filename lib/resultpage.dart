@@ -219,11 +219,15 @@ class _ResultPageState extends State<ResultPage> {
                                     taxSlabRule.assesibleIncome.toString(),
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.right, // Align text to the right
                                   )),
                                   DataCell(Text(
-                                    taxSlabRule.rate.toString(),)),
+                                    taxSlabRule.rate.toString(),
+                                    textAlign: TextAlign.right, // Align text to the right
+                                  )),
                                   DataCell(Text(
-                                      taxSlabRule.taxLiability.toString(),
+                                    taxSlabRule.taxLiability.toString(),
+                                    textAlign: TextAlign.right, // Align text to the right
                                   )),
                                 ]);
                               }).toList()
@@ -235,6 +239,7 @@ class _ResultPageState extends State<ResultPage> {
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.0,
                                           color: Colors.blueAccent),
+                                      textAlign: TextAlign.right,
                                     ),
                                   ),
                                   const DataCell(Text('')),
@@ -244,6 +249,7 @@ class _ResultPageState extends State<ResultPage> {
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16.0,
                                         color: Colors.blueAccent),
+                                    textAlign: TextAlign.right,
                                   )),
                                 ])),
                             ),
