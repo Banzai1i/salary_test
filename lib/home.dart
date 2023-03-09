@@ -5,7 +5,8 @@ import 'models/year_model.dart';
 import 'resultpage.dart';
 
 class IncomeCalculator extends StatefulWidget {
-  const IncomeCalculator({super.key});
+  const IncomeCalculator({Key? key}) : super(key: key);
+
 
   @override
   _IncomeCalculatorState createState() => _IncomeCalculatorState();
@@ -156,7 +157,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                       Expanded(
                         child: DropdownButtonFormField<TaxPayerType>(
                           value: _selectedValue,
-                          hint: Text('Please Select'),
+                          // hint: Text('Please Select'),
                           items: _taxPayerTypes
                               .map((taxPayerType) =>
                                   DropdownMenuItem<TaxPayerType>(
@@ -180,7 +181,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                       const SizedBox(width: 10.0),
                       Expanded(
                           child: DropdownButtonFormField(
-                        hint: const Text("Please Select"),
+                        // hint: const Text("Please Select"),
                         value: _selectedFiscalYear,
                         items: _fiscalYears.map((fiscalYear) {
                           return DropdownMenuItem<FiscalYear>(
@@ -227,12 +228,6 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                     decoration: const InputDecoration(
                         labelText: "Bonus", border: OutlineInputBorder()),
                     keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a valid bonus';
-                      }
-                      return null;
-                    },
                     //onChanged: (_) => calculateTotalIncome(),
                   ),
                   const SizedBox(
@@ -277,12 +272,6 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                         labelText: "Social Security Fund",
                         border: OutlineInputBorder()),
                     keyboardType: TextInputType.number,
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'Please enter a valid amount';
-                    //   }
-                    //   return null;
-                    // },
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -294,12 +283,6 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                         labelText: "Employee Provident Fund",
                         border: OutlineInputBorder()),
                     keyboardType: TextInputType.number,
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'Please enter a valid amount';
-                    //   }
-                    //   return null;
-                    // },
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -311,12 +294,6 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                         labelText: "Citizen Investment Trust Fund",
                         border: OutlineInputBorder()),
                     keyboardType: TextInputType.number,
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'Please enter a valid amount';
-                    //   }
-                    //   return null;
-                    // },
                   ),
                   const SizedBox(
                     height: 10.0,
@@ -327,12 +304,6 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                     decoration: const InputDecoration(
                         labelText: "Insurance", border: OutlineInputBorder()),
                     keyboardType: TextInputType.number,
-                    // validator: (value) {
-                    //   if (value == null || value.isEmpty) {
-                    //     return 'Please enter a valid amount';
-                    //   }
-                    //   return null;
-                    // },
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -345,7 +316,11 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                           child: Text('Reset')),
                       ElevatedButton(
                         child: Text('Calculate'),
-                        onPressed: _goToResultPage,
+                        onPressed:(){
+                          if (formKey.currentState!.validate()){
+                            _goToResultPage();
+                          }
+                        },
                       )
                     ],
                   ),

@@ -145,131 +145,133 @@ class _ResultPageState extends State<ResultPage> {
       body: data == null
           ? const Center(child: CircularProgressIndicator())
           : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SingleChildScrollView(
-                    child: Expanded(
-                      child: DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.blue.shade500),
-                        dataRowColor: MaterialStateColor.resolveWith(
-                            (states) => const Color(0xFFD5E7FF)),
-                        decoration: BoxDecoration(border: Border.all()),
-                        columns: const <DataColumn>[
-                          DataColumn(label: Text('Data')),
-                          DataColumn(label: Text('Amount')),
-                        ],
-                        rows: <DataRow>[
-                          DataRow(
-                            cells: <DataCell>[
-                              const DataCell(Text('Total Income(TI):')),
-                              DataCell(Text('Rs.${totalSal.toString()}')),
-                            ],
-                          ),
-                          DataRow(cells: <DataCell>[
-                            const DataCell(
-                                Text('Sum of SSF, EPF, and CIT(SSF+EPF+CIT):')),
-                            DataCell(Text('Rs.${data.accessiblessfcitpf}')),
-                          ]),
-                          DataRow(
-                            cells: <DataCell>[
-                              const DataCell(Text('Insurance:')),
-                              DataCell(Text('Rs.${data.accessibleins}')),
-                            ],
-                          ),
-                          DataRow(
-                            cells: <DataCell>[
-                              const DataCell(Text('Total Deduction(TD):')),
-                              DataCell(Text(
-                                'Rs.${totalDeduction.toStringAsFixed(2)}',
-                              )),
-                            ],
-                          ),
-                          DataRow(cells: <DataCell>[
-                            const DataCell(Text('Net Assessable(TI-TD):')),
-                            DataCell(Text('Rs.${data.taxableIncome}'))
-                          ]),
-                        ],
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    SingleChildScrollView(
+                      child: Expanded(
+                        child: DataTable(
+                          headingRowColor: MaterialStateColor.resolveWith(
+                              (states) => Colors.blue.shade500),
+                          dataRowColor: MaterialStateColor.resolveWith(
+                              (states) => const Color(0xFFD5E7FF)),
+                          decoration: BoxDecoration(border: Border.all()),
+                          columns: const <DataColumn>[
+                            DataColumn(label: Text('Data')),
+                            DataColumn(label: Text('Amount')),
+                          ],
+                          rows: <DataRow>[
+                            DataRow(
+                              cells: <DataCell>[
+                                const DataCell(Text('Total Income(TI):')),
+                                DataCell(Text('Rs.${totalSal.toString()}')),
+                              ],
+                            ),
+                            DataRow(cells: <DataCell>[
+                              const DataCell(
+                                  Text('Sum of SSF, EPF, and CIT(SSF+EPF+CIT):')),
+                              DataCell(Text('Rs.${data.accessiblessfcitpf}')),
+                            ]),
+                            DataRow(
+                              cells: <DataCell>[
+                                const DataCell(Text('Insurance:')),
+                                DataCell(Text('Rs.${data.accessibleins}')),
+                              ],
+                            ),
+                            DataRow(
+                              cells: <DataCell>[
+                                const DataCell(Text('Total Deduction(TD):')),
+                                DataCell(Text(
+                                  'Rs.${totalDeduction.toStringAsFixed(2)}',
+                                )),
+                              ],
+                            ),
+                            DataRow(cells: <DataCell>[
+                              const DataCell(Text('Net Assessable(TI-TD):')),
+                              DataCell(Text('Rs.${data.taxableIncome}'))
+                            ]),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  taxSlabRules.isEmpty
-                      ? const Center(child: CircularProgressIndicator())
-                      : SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Expanded(
-                            child: DataTable(
-                              columnSpacing: 29.0,
-                              headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.blue.shade500),
-                              dataRowColor: MaterialStateColor.resolveWith(
-                                  (states) => const Color(0xFFD5E7FF)),
-                              decoration: BoxDecoration(border: Border.all()),
-                              columns: const [
-                                DataColumn(
-                                    label: Text('Accessible Income(Rs.)')),
-                                DataColumn(label: Text('Rate(%)')),
-                                DataColumn(label: Text('Tax Liability(Rs.)')),
-                              ],
-                              rows: taxSlabRules.map((taxSlabRule) {
-                                return DataRow(cells: [
-                                  DataCell(Text(
-                                    taxSlabRule.assesibleIncome.toString(),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.right, // Align text to the right
-                                  )),
-                                  DataCell(Text(
-                                    taxSlabRule.rate.toString(),
-                                    textAlign: TextAlign.right, // Align text to the right
-                                  )),
-                                  DataCell(Text(
-                                    taxSlabRule.taxLiability.toString(),
-                                    textAlign: TextAlign.right, // Align text to the right
-                                  )),
-                                ]);
-                              }).toList()
-                                ..add(DataRow(cells: [
-                                  DataCell(
-                                    Text(
-                                      income,
+                    const SizedBox(height: 20),
+                    taxSlabRules.isEmpty
+                        ? const Center(child: CircularProgressIndicator())
+                        : SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Expanded(
+                              child: DataTable(
+                                columnSpacing: 29.0,
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                    (states) => Colors.blue.shade500),
+                                dataRowColor: MaterialStateColor.resolveWith(
+                                    (states) => const Color(0xFFD5E7FF)),
+                                decoration: BoxDecoration(border: Border.all()),
+                                columns: const [
+                                  DataColumn(
+                                      label: Text('Accessible Income(Rs.)')),
+                                  DataColumn(label: Text('Rate(%)')),
+                                  DataColumn(label: Text('Tax Liability(Rs.)')),
+                                ],
+                                rows: taxSlabRules.map((taxSlabRule) {
+                                  return DataRow(cells: [
+                                    DataCell(Text(
+                                      taxSlabRule.assesibleIncome.toString(),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.right, // Align text to the right
+                                    )),
+                                    DataCell(Text(
+                                      taxSlabRule.rate.toString(),
+                                      textAlign: TextAlign.right, // Align text to the right
+                                    )),
+                                    DataCell(Text(
+                                      taxSlabRule.taxLiability.toString(),
+                                      textAlign: TextAlign.right, // Align text to the right
+                                    )),
+                                  ]);
+                                }).toList()
+                                  ..add(DataRow(cells: [
+                                    DataCell(
+                                      Text(
+                                        income,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0,
+                                            color: Colors.blueAccent),
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                    const DataCell(Text('')),
+                                    DataCell(Text(
+                                      taxLiability,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.0,
                                           color: Colors.blueAccent),
                                       textAlign: TextAlign.right,
-                                    ),
-                                  ),
-                                  const DataCell(Text('')),
-                                  DataCell(Text(
-                                    taxLiability,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Colors.blueAccent),
-                                    textAlign: TextAlign.right,
-                                  )),
-                                ])),
+                                    )),
+                                  ])),
+                              ),
                             ),
                           ),
-                        ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Text('Net Tax Liability (Monthly): $monthly', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Text('Net Tax Liability (Yearly) : $taxLiability', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                  const SizedBox(
-                    height: 30.0,
-                  ),
-                  Row(
-                    children: const [Text("*This is rough estimation")],
-                  )
-                ],
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Text('Net Tax Liability (Monthly): $monthly', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Text('Net Tax Liability (Yearly) : $taxLiability', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    const SizedBox(
+                      height: 30.0,
+                    ),
+                    Row(
+                      children: const [Text("*This is rough estimation")],
+                    )
+                  ],
+                ),
               ),
             ),
     );
