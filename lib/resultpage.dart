@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'models/year_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'home.dart';
 import 'package:intl/intl.dart';
 
 class ResultPage extends StatefulWidget {
@@ -217,7 +216,7 @@ class _ResultPageState extends State<ResultPage> {
                                 rows: taxSlabRules.map((taxSlabRule) {
                                   return DataRow(cells: [
                                     DataCell(Text(
-                                      taxSlabRule.assesibleIncome.toString(),
+                                      NumberFormat.decimalPattern('hi').format(taxSlabRule.assesibleIncome),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                       textAlign: TextAlign.right, // Align text to the right
@@ -227,7 +226,7 @@ class _ResultPageState extends State<ResultPage> {
                                       textAlign: TextAlign.right, // Align text to the right
                                     )),
                                     DataCell(Text(
-                                      taxSlabRule.taxLiability.toString(),
+                                      NumberFormat.decimalPattern('hi').format(taxSlabRule.taxLiability),
                                       textAlign: TextAlign.right, // Align text to the right
                                     )),
                                   ]);
@@ -257,7 +256,7 @@ class _ResultPageState extends State<ResultPage> {
                             ),
                           ),
                     const SizedBox(
-                      height: 10.0,
+                      height: 3.0,
                     ),
                     Text('Net Tax Liability (Monthly): $monthly', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                     const SizedBox(
