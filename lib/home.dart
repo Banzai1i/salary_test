@@ -157,7 +157,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                       Expanded(
                         child: DropdownButtonFormField<TaxPayerType>(
                           value: _selectedValue,
-                          // hint: Text('Please Select'),
+                          hint: Text('Please Select'),
                           items: _taxPayerTypes
                               .map((taxPayerType) =>
                                   DropdownMenuItem<TaxPayerType>(
@@ -181,7 +181,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                       const SizedBox(width: 10.0),
                       Expanded(
                           child: DropdownButtonFormField(
-                        // hint: const Text("Please Select"),
+                        hint: const Text("Please Select"),
                         value: _selectedFiscalYear,
                         items: _fiscalYears.map((fiscalYear) {
                           return DropdownMenuItem<FiscalYear>(
