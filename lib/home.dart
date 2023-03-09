@@ -6,7 +6,7 @@ import 'resultpage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-enum SocialMedia { linkedin, email, twitter, facebook }
+enum SocialMedia { facebook, twitter, email, linkedin }
 
 class IncomeCalculator extends StatefulWidget {
   const IncomeCalculator({Key? key}) : super(key: key);
@@ -428,22 +428,22 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
             buildSocialButton(
               icon: FontAwesomeIcons.squareFacebook,
               color: Color(0xFF0075fc),
-              onClicked: () => share(SocialMedia.facebook),
+              onPressed: () => share(SocialMedia.facebook),
             ),
             buildSocialButton(
               icon: FontAwesomeIcons.twitter,
               color: Color(0xFF1da1f2),
-              onClicked: () => share(SocialMedia.twitter),
+              onPressed: () => share(SocialMedia.twitter),
             ),
             buildSocialButton(
               icon: FontAwesomeIcons.envelope,
               color: Colors.black87,
-              onClicked: () => share(SocialMedia.email),
+              onPressed: () => share(SocialMedia.email),
             ),
             buildSocialButton(
               icon: FontAwesomeIcons.linkedin,
               color: Color(0xFF0064c9),
-              onClicked: () => share(SocialMedia.linkedin),
+              onPressed: () => share(SocialMedia.linkedin),
             ),
           ],
         ),
@@ -452,14 +452,14 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
   Future share(SocialMedia socialPlatform) async {
     final subject = 'Salary Tax Calculator';
     final text =
-        'Use Salary Tax Calculator to calculate yourSalary Tax based on the Nepal Government Tax Policy ';
+        'Use Salary Tax Calculator to calculate your Salary Tax based on the Nepal Government Tax Policy ';
     final urlShare = Uri.encodeComponent('https://www.salarytaxnepal.com/');
 
     final urls = {
       SocialMedia.facebook:
-          Uri.parse('http://www.facebook.com/sharer.php?u=$urlShare&p[title]=$text'),
+          Uri.parse('http://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$text'),
       SocialMedia.twitter:
-      Uri.parse('http://twitter.com/share?text=$text&url=$urlShare'),
+      Uri.parse('http://twitter.com/intent/tweet?url=$urlShare&text=$text'),
       SocialMedia.email:
       Uri.parse('mailto:?subject=$subject&body=$text\n\n$urlShare'),
       SocialMedia.linkedin:
@@ -475,12 +475,12 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
   Widget buildSocialButton({
     required IconData icon,
     Color? color,
-    required VoidCallback onClicked,
+    required VoidCallback onPressed,
   }) =>
       InkWell(
         child: Container(
           width: 64,
-          height: 64,
+          height: 50,
           child: Center(
             child: FaIcon(
               icon,
@@ -489,6 +489,6 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
             ),
           ),
         ),
-        onTap: onClicked,
+        onTap: onPressed,
       );
 }
