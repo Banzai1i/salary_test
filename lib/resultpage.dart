@@ -138,6 +138,7 @@ class _ResultPageState extends State<ResultPage> {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xFF286090),
         title: const Text("Tax Liability"),
         centerTitle: true,
       ),
@@ -151,7 +152,7 @@ class _ResultPageState extends State<ResultPage> {
                     SingleChildScrollView(
                       child: DataTable(
                         headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Colors.blue.shade500),
+                            (states) => Color(0xFF286090)),
                         dataRowColor: MaterialStateColor.resolveWith(
                             (states) => const Color(0xFFD5E7FF)),
                         decoration: BoxDecoration(border: Border.all()),
@@ -163,7 +164,7 @@ class _ResultPageState extends State<ResultPage> {
                           DataRow(
                             cells: <DataCell>[
                               const DataCell(Text('Total Income(TI):')),
-                              DataCell(Text('Rs.${totalSal.toStringAsFixed(1)}')),
+                              DataCell(Text('Rs.${totalSal.toStringAsFixed(2)}')),
                             ],
                           ),
                           DataRow(cells: <DataCell>[
@@ -181,7 +182,7 @@ class _ResultPageState extends State<ResultPage> {
                             cells: <DataCell>[
                               const DataCell(Text('Total Deduction(TD):')),
                               DataCell(Text(
-                                'Rs.${totalDeduction.toStringAsFixed(1)}',
+                                'Rs.${totalDeduction.toStringAsFixed(2)}',
                               )),
                             ],
                           ),
@@ -200,7 +201,7 @@ class _ResultPageState extends State<ResultPage> {
                             child: DataTable(
                               columnSpacing: 28.5,
                               headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Colors.blue.shade500),
+                                  (states) => Color(0xFF286090)),
                               dataRowColor: MaterialStateColor.resolveWith(
                                   (states) => const Color(0xFFD5E7FF)),
                               decoration: BoxDecoration(border: Border.all()),
@@ -237,7 +238,7 @@ class _ResultPageState extends State<ResultPage> {
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.0,
-                                          color: Colors.blueAccent),
+                                          color: Color(0xFF286090)),
                                       textAlign: TextAlign.right,
                                     ),
                                   ),
@@ -247,7 +248,7 @@ class _ResultPageState extends State<ResultPage> {
                                     style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16.0,
-                                        color: Colors.blueAccent),
+                                        color: Color(0xFF286090)),
                                     textAlign: TextAlign.right,
                                   )),
                                 ])),
