@@ -5,6 +5,7 @@ import 'models/year_model.dart';
 import 'resultpage.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/services.dart';
 
 enum SocialMedia { facebook, twitter, email, linkedin }
 
@@ -171,7 +172,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
         centerTitle: true,
       ),
       body: Container(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0,),
         child: Center(
           child: SingleChildScrollView(
             child: Form(
@@ -235,38 +236,47 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                   ),
                   const SizedBox(height: 6.0),
                   TextFormField(
-                    autofocus: true,
-                    controller: salaryController,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                     decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
-                        labelText: "Monthly Salary",
-                        border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
+                      contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
+                      labelText: "Monthly Salary",
+                      border: OutlineInputBorder(),
+                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter a valid salary';
                       }
                       return null;
                     },
-                    //onChanged: (_) => calculateTotalIncome(),
+                    controller: salaryController,
+                    autofocus: true,
                   ),
                   const SizedBox(
                     height: 6.0,
                   ),
                   TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
                     autofocus: true,
                     controller: bonusController,
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                         labelText: "Bonus",
                         border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                     //onChanged: (_) => calculateTotalIncome(),
                   ),
                   const SizedBox(
                     height: 6.0,
                   ),
                   TextFormField(
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     autofocus: true,
                     controller: monthsController,
                     decoration: const InputDecoration(
@@ -296,49 +306,61 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
                     height: 6.0,
                   ),
                   TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
                     autofocus: true,
                     controller: ssfController,
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                         labelText: "Social Security Fund",
                         border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                   ),
                   const SizedBox(
                     height: 6.0,
                   ),
                   TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
                     autofocus: true,
                     controller: epfController,
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                         labelText: "Employee Provident Fund",
                         border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                   ),
                   const SizedBox(
                     height: 6.0,
                   ),
                   TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
                     autofocus: true,
                     controller: citController,
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                         labelText: "Citizen Investment Trust Fund",
                         border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                   ),
                   const SizedBox(
                     height: 6.0,
                   ),
                   TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}')),
+                    ],
                     autofocus: true,
                     controller: insController,
                     decoration: const InputDecoration(
                         contentPadding: EdgeInsets.symmetric(horizontal: 10.0),
                         labelText: "Insurance",
                         border: OutlineInputBorder()),
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -427,12 +449,12 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
           children: [
             buildSocialButton(
               icon: FontAwesomeIcons.squareFacebook,
-              color: Color(0xFF0075fc),
+              color: const Color(0xFF0075fc),
               onPressed: () => share(SocialMedia.facebook),
             ),
             buildSocialButton(
               icon: FontAwesomeIcons.twitter,
-              color: Color(0xFF1da1f2),
+              color: const Color(0xFF1da1f2),
               onPressed: () => share(SocialMedia.twitter),
             ),
             buildSocialButton(
@@ -442,7 +464,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
             ),
             buildSocialButton(
               icon: FontAwesomeIcons.linkedin,
-              color: Color(0xFF0064c9),
+              color: const Color(0xFF0064c9),
               onPressed: () => share(SocialMedia.linkedin),
             ),
           ],
@@ -456,18 +478,20 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
     final urlShare = Uri.encodeComponent('https://www.salarytaxnepal.com/');
 
     final urls = {
-      SocialMedia.facebook:
-          Uri.parse('http://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$text'),
+      SocialMedia.facebook: Uri.parse(
+          'https://www.facebook.com/sharer/sharer.php?u=$urlShare&t=$text'),
       SocialMedia.twitter:
-      Uri.parse('http://twitter.com/intent/tweet?url=$urlShare&text=$text'),
+      Uri.parse('https://twitter.com/intent/tweet?url=$urlShare&text=$text'),
       SocialMedia.email:
       Uri.parse('mailto:?subject=$subject&body=$text\n\n$urlShare'),
-      SocialMedia.linkedin:
-          Uri.parse('https://www.linkedin.com/shareArticle?mini=true&url=$urlShare&title=$text'),
+      SocialMedia.linkedin: Uri.parse(
+          'https://www.linkedin.com/shareArticle?mini=true&url=$urlShare&title=$text'),
     };
-    final url = urls[socialPlatform]!;
+    final url = urls[socialPlatform];
 
-    if (await canLaunchUrl(url)) {
+    print('share url: $url');
+
+    if (url != null && await canLaunchUrl(url)) {
       await launchUrl(url);
     }
   }
