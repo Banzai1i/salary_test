@@ -157,8 +157,8 @@ class _ResultPageState extends State<ResultPage> {
                             (states) => const Color(0xFFD5E7FF)),
                         decoration: BoxDecoration(border: Border.all()),
                         columns: const <DataColumn>[
-                          DataColumn(label: Text('Data')),
-                          DataColumn(numeric: true,label: Text('Amount')),
+                          DataColumn(label: Text('Data', style: TextStyle(fontSize: 16, color: Colors.white),)),
+                          DataColumn(numeric: true,label: Text('Amount', style: TextStyle(fontSize: 16, color: Colors.white),)),
                         ],
                         rows: <DataRow>[
                           DataRow(
@@ -197,65 +197,81 @@ class _ResultPageState extends State<ResultPage> {
                     taxSlabRules.isEmpty
                         ? const Center(child: CircularProgressIndicator())
                         : SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: DataTable(
-                              columnSpacing: 28.5,
-                              headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Color(0xFF286090)),
-                              dataRowColor: MaterialStateColor.resolveWith(
-                                  (states) => const Color(0xFFD5E7FF)),
-                              decoration: BoxDecoration(border: Border.all()),
-                              columns: const [
-                                DataColumn(numeric: true,
-                                    label: Text('Accessible Income(Rs.)')),
-                                DataColumn(numeric: true,
-                                    label: Text('Rate(%)')),
-                                DataColumn(numeric: true,
-                                    label: Text('Tax Liability(Rs.)')),
-                              ],
-                              rows: taxSlabRules.map((taxSlabRule) {
-                                return DataRow(cells: [
-                                  DataCell(Text(
-                                    NumberFormat.decimalPattern('hi').format(taxSlabRule.assesibleIncome),
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.right, // Align text to the right
-                                  )),
-                                  DataCell(Text(
-                                    taxSlabRule.rate.toString(),
-                                    textAlign: TextAlign.right, // Align text to the right
-                                  )),
-                                  DataCell(Text(
-                                    NumberFormat.decimalPattern('hi').format(taxSlabRule.taxLiability),
-                                    textAlign: TextAlign.right, // Align text to the right
-                                  )),
-                                ]);
-                              }).toList()
-                                ..add(DataRow(cells: [
-                                  DataCell(
-                                    Text(
-                                      income,
+                            child: Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: DataTable(
+                                columnSpacing: 29.0,
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                    (states) => Color(0xFF286090)),
+                                dataRowColor: MaterialStateColor.resolveWith(
+                                    (states) => const Color(0xFFD5E7FF)),
+                                decoration: BoxDecoration(border: Border.all()),
+                                columns:  [
+                                  DataColumn(numeric: true,
+                                      label: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Accessible', style: TextStyle(fontSize: 16, color: Colors.white),),
+                                          Text('Income(Rs.)', style: TextStyle(fontSize: 16, color: Colors.white),)
+                                        ],
+                                      )),
+                                  DataColumn(numeric: true,
+                                      label: Text('Rate(%)', style: TextStyle(fontSize: 16, color: Colors.white))),
+                                  DataColumn(numeric: true,
+                                      label: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text('Tax', style: TextStyle(fontSize: 16, color: Colors.white),),
+                                          Text('Liability(Rs.)', style: TextStyle(fontSize: 16, color: Colors.white),)
+                                        ],
+                                      )),
+                                ],
+                                rows: taxSlabRules.map((taxSlabRule) {
+                                  return DataRow(cells: [
+                                    DataCell(Text(
+                                      NumberFormat.decimalPattern('hi').format(taxSlabRule.assesibleIncome),
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.right, // Align text to the right
+                                    )),
+                                    DataCell(Text(
+                                      taxSlabRule.rate.toString(),
+                                      textAlign: TextAlign.right, // Align text to the right
+                                    )),
+                                    DataCell(Text(
+                                      NumberFormat.decimalPattern('hi').format(taxSlabRule.taxLiability),
+                                      textAlign: TextAlign.right, // Align text to the right
+                                    )),
+                                  ]);
+                                }).toList()
+                                  ..add(DataRow(cells: [
+                                    DataCell(
+                                      Text(
+                                        income,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 16.0,
+                                            color: Color(0xFF286090)),
+                                        textAlign: TextAlign.right,
+                                      ),
+                                    ),
+                                    const DataCell(Text('')),
+                                    DataCell(Text(
+                                      taxLiability,
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16.0,
                                           color: Color(0xFF286090)),
                                       textAlign: TextAlign.right,
-                                    ),
-                                  ),
-                                  const DataCell(Text('')),
-                                  DataCell(Text(
-                                    taxLiability,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16.0,
-                                        color: Color(0xFF286090)),
-                                    textAlign: TextAlign.right,
-                                  )),
-                                ])),
+                                    )),
+                                  ])),
+                              ),
                             ),
                           ),
                     const SizedBox(
-                      height: 3.0,
+                      height: 20.0,
                     ),
                     Text('Net Tax Liability (Monthly): $monthly', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                     const SizedBox(
