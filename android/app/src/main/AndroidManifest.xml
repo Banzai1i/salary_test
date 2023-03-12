@@ -2,7 +2,7 @@
     package="com.example.salary_test">
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="salary_test"
+        android:label="Salary Tax Calculator"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

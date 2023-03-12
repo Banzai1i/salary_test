@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Income Calculator',
+      title: 'Salary Tax Calculator',
       home: IncomeCalculator(),
     );
   }
