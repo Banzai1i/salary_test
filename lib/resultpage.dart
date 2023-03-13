@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'models/year_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:intl/intl.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ResultPage extends StatefulWidget {
   final double totalSal;
@@ -38,10 +40,6 @@ class _ResultPageState extends State<ResultPage> {
   String? get cit => widget.citController;
 
   String? get ins => widget.insController;
-  //
-  // String? get tax => widget.selectedValue;
-  //
-  // String? get year => widget.selectedFiscalYear;
 
   List<SlabRule> taxSlabRules = [];
   EligibleDeductionAmount data = EligibleDeductionAmount(
@@ -283,7 +281,10 @@ class _ResultPageState extends State<ResultPage> {
                     ),
                     Row(
                       children: const [Text("*This is rough estimation")],
-                    )
+                    ),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                   ],
                 ),
               ),
