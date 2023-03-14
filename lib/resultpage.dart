@@ -293,17 +293,21 @@ class _ResultPageState extends State<ResultPage> {
                       height: 30.0,
                     ),
                     Row(
-                      children: const [Text("*This is rough estimation")],
-                    ),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(onPressed: _printDataTables, child: Icon(Icons.print)),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:  [
+                        Text("*This is rough estimation"),
+                        ElevatedButton(onPressed: _printDataTables, child: const Icon(Icons.print), style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF286090)),)
                       ],
                     ),
+                    // SizedBox(
+                    //   height: 20.0,
+                    // ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //
+                    //   ],
+                    // ),
                   ],
                 ),
               ),
@@ -383,12 +387,13 @@ class _ResultPageState extends State<ResultPage> {
         pw.Text('*This is a rough estimation'),
         pw.SizedBox(height: 50),
         pw.Text('Powered By:', style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+        pw.SizedBox(height: 20),
+        pw.Image(image),
+        pw.SizedBox(height: 20),
         pw.Text('Eattendance.com (Online Attendance, leave, and payroll system)'),
         pw.Text('www.eattendance.com'),
         pw.Text('Email: info@eattendance.com'),
         pw.Text('Phone: +977-9851164319'),
-        pw.SizedBox(height: 20),
-        pw.Image(image),
       ],
     ));
 
