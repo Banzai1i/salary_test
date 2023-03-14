@@ -502,6 +502,7 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
     required VoidCallback onPressed,
   }) =>
       InkWell(
+        onTap: onPressed,
         child: Container(
           width: 64,
           height: 50,
@@ -513,6 +514,5 @@ class _IncomeCalculatorState extends State<IncomeCalculator> {
             ),
           ),
         ),
-        onTap: onPressed,
       );
 }
