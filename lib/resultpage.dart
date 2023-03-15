@@ -343,6 +343,12 @@ class _ResultPageState extends State<ResultPage> {
             color: PdfColors.blue,
           ),
           cellPadding: const pw.EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          columnWidths: {
+            0: pw.FixedColumnWidth(200),
+            1: pw.FlexColumnWidth(),
+          },
+          cellAlignment: pw.Alignment.centerRight,
+          headerAlignment: pw.Alignment.centerRight,
           data: [
             ['Data', 'Amount'],
             ['Total Income(TI):', 'Rs.${totalSal.toStringAsFixed(2)}'],
@@ -351,6 +357,7 @@ class _ResultPageState extends State<ResultPage> {
             ['Total Deduction(TD):', 'Rs.${totalDeduction.toStringAsFixed(2)}'],
             ['Net Assessable(TI-TD):', 'Rs.${data.taxableIncome}'],
           ],
+          // cellAlignment: pw.Alignment.centerRight,
         ),
         pw.SizedBox(height: 20),
         pw.Table.fromTextArray(
@@ -378,6 +385,7 @@ class _ResultPageState extends State<ResultPage> {
               taxLiability,
             ],
           ],
+          cellAlignment: pw.Alignment.centerRight,
         ),
         pw.SizedBox(height: 20),
         pw.Text('Net Tax Liability (Monthly): $monthly', style: pw.TextStyle(fontSize: 16.0, fontWeight: pw.FontWeight.bold)),
@@ -427,12 +435,16 @@ class PreviewScreen extends StatelessWidget {
         title: Text('Preview'),
         backgroundColor: const Color(0xFF286090),
       ),
-      body: PdfPreview(
-        build: (format) => doc.save(),
-        allowSharing: true,
-        allowPrinting: true,
-        initialPageFormat: PdfPageFormat.a4,
-        pdfFileName: "salarytax.pdf",
+      body: Scaffold(
+        backgroundColor: Color(0xFF286090),
+        body: PdfPreview(
+          build: (format) => doc.save(),
+          allowSharing: true,
+          allowPrinting: true,
+          initialPageFormat: PdfPageFormat.a4,
+          pdfFileName: "salarytax.pdf",
+
+        ),
       ),
     );
   }
